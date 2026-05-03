@@ -19,6 +19,13 @@
       />
     </button>
 
+    <select v-model="category" class="category-select" aria-label="Категорія завдання">
+      <option value="Навчання">Навчання</option>
+      <option value="Спорт">Спорт</option>
+      <option value="Робота">Робота</option>
+      <option value="Особисте">Особисте</option>
+    </select>
+
     <button class="add-btn" @click="handleAdd" :disabled="!taskName || !deadline">
       + Додати
     </button>
@@ -31,6 +38,7 @@ import { ref, computed } from 'vue'
 const emit = defineEmits(['add'])
 const taskName = ref('')
 const deadline = ref('')
+const category = ref('Навчання')
 const dateInput = ref(null)
 const today = new Date().toISOString().split('T')[0]
 
@@ -52,9 +60,10 @@ function openPicker() {
 
 function handleAdd() {
   if (taskName.value && deadline.value) {
-    emit('add', taskName.value, deadline.value)
+    emit('add', taskName.value, deadline.value, category.value)
     taskName.value = ''
     deadline.value = ''
+    category.value = 'Навчання'
   }
 }
 </script>
@@ -102,7 +111,6 @@ function handleAdd() {
   white-space: nowrap;
   position: relative;
   transition: background 0.15s, border-color 0.15s;
-  /* Висота і padding ідентичні кнопці "+ Додати" */
   height: 40px;
 }
 
@@ -124,6 +132,27 @@ function handleAdd() {
 }
 
 .date-text { min-width: 82px; }
+
+.category-select {
+  height: 40px;
+  padding: 0 12px;
+  background: #f7f4ef;
+  border: 1.5px solid #e8e3da;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b6257;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+.category-select:hover,
+.category-select:focus {
+  background: #f0ebe0;
+  border-color: #d4cfc8;
+}
 
 /* Повністю прихований нативний input */
 .input-date-hidden {

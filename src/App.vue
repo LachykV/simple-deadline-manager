@@ -3,7 +3,11 @@
     <header class="app-header">
       <div class="title-row">
         <img src="/clock.png" class="title-icon" alt="clock" />
-        <h1>Deadline Manager</h1>
+<<<<<<< HEAD
+        <h1>Deadline Manager (conflict 1)</h1>
+=======
+        <h1>Deadline Manager (conflict 2)</h1>
+>>>>>>> feature/title-b
       </div>
       <div class="stats">
         <span class="stat">{{ tasks.length }} завдань</span>

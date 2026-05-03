@@ -1,21 +1,19 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 
 export function useTasks() {
-  const saved = localStorage.getItem('tasks')
-  const tasks = ref(saved ? JSON.parse(saved) : [])
+  const tasks = ref([])
 
-  watch(tasks, (val) => {
-    localStorage.setItem('tasks', JSON.stringify(val))
-  }, { deep: true })
-
-  function addTask(name, deadline) {
+  function addTask(name, deadline, category) {
     if (!name.trim()) return false
+
     tasks.value.push({
       id: Date.now(),
       name: name.trim(),
       deadline: deadline,
+      category: category || 'Навчання',
       createdAt: new Date().toISOString()
     })
+
     return true
   }
 
@@ -26,14 +24,23 @@ export function useTasks() {
   function getDaysUntilDeadline(deadline) {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
+
     const deadlineDate = new Date(deadline)
     deadlineDate.setHours(0, 0, 0, 0)
-    return Math.round((deadlineDate - today) / (1000 * 60 * 60 * 24))
+
+    const diff = deadlineDate - today
+    return Math.round(diff / (1000 * 60 * 60 * 24))
   }
 
   const hotTasks = computed(() =>
     tasks.value.filter(t => getDaysUntilDeadline(t.deadline) < 3)
   )
 
-  return { tasks, addTask, removeTask, getDaysUntilDeadline, hotTasks }
+  return {
+    tasks,
+    addTask,
+    removeTask,
+    getDaysUntilDeadline,
+    hotTasks
+  }
 }

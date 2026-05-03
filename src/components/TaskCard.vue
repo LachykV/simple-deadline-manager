@@ -3,8 +3,13 @@
     <div class="card-left">
       <div class="dot"></div>
     </div>
+
     <div class="card-body">
-      <h3 class="task-name">{{ task.name }}</h3>
+      <div class="task-title-row">
+        <h3 class="task-name">{{ task.name }}</h3>
+        <span class="category-chip">{{ task.category }}</span>
+      </div>
+
       <p class="deadline-text">
         <span v-if="isOverdue">Прострочено {{ Math.abs(days) }} дн. тому</span>
         <span v-else-if="days === 0">Дедлайн сьогодні!</span>
@@ -12,6 +17,7 @@
         <span v-else>{{ days }} дн. до дедлайну</span>
       </p>
     </div>
+
     <div class="card-right">
       <span class="badge overdue-badge" v-if="isOverdue">прострочено</span>
       <span class="badge urgent-badge" v-else-if="isUrgent">терміново</span>
@@ -71,7 +77,17 @@ const isOverdue = computed(() => days.value < 0)
 .urgent .dot { background: #ffb3b3; }
 .overdue .dot { background: #e57373; }
 
-.card-body { flex: 1; min-width: 0; }
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
 
 .task-name {
   font-size: 15px;
@@ -80,6 +96,17 @@ const isOverdue = computed(() => days.value < 0)
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.category-chip {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b6257;
+  background: #f7f4ef;
+  border: 1px solid #e8e3da;
+  border-radius: 999px;
+  padding: 2px 8px;
 }
 
 .deadline-text {

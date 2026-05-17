@@ -1,7 +1,30 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+
+const STORAGE_KEY = 'simple-deadline-manager-tasks'
+
+function loadTasks() {
+  try {
+    const savedTasks = localStorage.getItem(STORAGE_KEY)
+    return savedTasks ? JSON.parse(savedTasks) : []
+  } catch {
+    return []
+  }
+}
+
+function saveTasks(tasks) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
+}
 
 export function useTasks() {
-  const tasks = ref([])
+  const tasks = ref(loadTasks())
+
+  watch(
+    tasks,
+    (newTasks) => {
+      saveTasks(newTasks)
+    },
+    { deep: true }
+  )
 
   function addTask(name, deadline, category) {
     if (!name.trim()) return false
@@ -9,7 +32,7 @@ export function useTasks() {
     tasks.value.push({
       id: Date.now(),
       name: name.trim(),
-      deadline: deadline,
+      deadline,
       category: category || 'Навчання',
       createdAt: new Date().toISOString()
     })
@@ -18,7 +41,7 @@ export function useTasks() {
   }
 
   function removeTask(id) {
-    tasks.value = tasks.value.filter(t => t.id !== id)
+    tasks.value = tasks.value.filter((task) => task.id !== id)
   }
 
   function getDaysUntilDeadline(deadline) {
@@ -33,7 +56,10 @@ export function useTasks() {
   }
 
   const hotTasks = computed(() =>
-    tasks.value.filter(t => getDaysUntilDeadline(t.deadline) < 3)
+    tasks.value.filter((task) => {
+      const days = getDaysUntilDeadline(task.deadline)
+      return days < 3 && days >= 0
+    })
   )
 
   return {

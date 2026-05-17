@@ -48,12 +48,14 @@ const isOverdue = computed(() => days.value < 0)
   padding: 16px 18px;
   margin-bottom: 10px;
   border: 1.5px solid #ede8df;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .task-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }
 
 .task-card.urgent {
@@ -74,8 +76,12 @@ const isOverdue = computed(() => days.value < 0)
   flex-shrink: 0;
 }
 
-.urgent .dot { background: #ffb3b3; }
-.overdue .dot { background: #e57373; }
+.urgent .dot {
+  background: #ffb3b3;
+}
+.overdue .dot {
+  background: #e57373;
+}
 
 .card-body {
   flex: 1;
@@ -115,8 +121,12 @@ const isOverdue = computed(() => days.value < 0)
   margin-top: 3px;
 }
 
-.urgent .deadline-text { color: #c0392b; }
-.overdue .deadline-text { color: #a93226; }
+.urgent .deadline-text {
+  color: #c0392b;
+}
+.overdue .deadline-text {
+  color: #a93226;
+}
 
 .card-right {
   display: flex;

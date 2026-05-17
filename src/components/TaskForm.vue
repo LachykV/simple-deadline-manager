@@ -77,7 +77,7 @@ function handleAdd() {
   padding: 10px;
   border-radius: 16px;
   border: 1.5px solid #e8e3da;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   align-items: center;
 }
 
@@ -92,7 +92,9 @@ function handleAdd() {
   padding: 8px 10px;
 }
 
-.input-name::placeholder { color: #c5bfb5; }
+.input-name::placeholder {
+  color: #c5bfb5;
+}
 
 /* Кнопка вибору дати — такого ж розміру як "+ Додати" */
 .date-btn {
@@ -110,7 +112,9 @@ function handleAdd() {
   color: #6b6257;
   white-space: nowrap;
   position: relative;
-  transition: background 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
   height: 40px;
 }
 
@@ -131,7 +135,9 @@ function handleAdd() {
   object-fit: contain;
 }
 
-.date-text { min-width: 82px; }
+.date-text {
+  min-width: 82px;
+}
 
 .category-select {
   height: 40px;
@@ -175,7 +181,9 @@ function handleAdd() {
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s, transform 0.1s;
+  transition:
+    background 0.15s,
+    transform 0.1s;
 }
 
 .add-btn:hover:not(:disabled) {

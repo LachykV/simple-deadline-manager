@@ -5,6 +5,7 @@
         <img src="/clock.png" class="title-icon" alt="clock" />
         <h1>Deadline Manager</h1>
       </div>
+
       <div class="stats">
         <span class="stat">{{ tasks.length }} завдань</span>
         <span class="divider">·</span>
@@ -12,6 +13,8 @@
           {{ hotTasks.length }} терміново
         </span>
       </div>
+
+      <p class="app-status">{{ appStatus }}</p>
     </header>
 
     <TaskForm @add="addTask" />
@@ -20,15 +23,9 @@
       <span>{{ tasks.length }} завдань</span>
     </div>
 
-    <TaskList
-      :tasks="tasks"
-      :getDays="getDaysUntilDeadline"
-      @remove="removeTask"
-    />
+    <TaskList :tasks="tasks" :getDays="getDaysUntilDeadline" @remove="removeTask" />
 
-    <p v-if="tasks.length === 0" class="empty-state">
-      (Список порожній)
-    </p>
+    <p v-if="tasks.length === 0" class="empty-state">(Список порожній)</p>
   </div>
 </template>
 
@@ -38,6 +35,9 @@ import TaskList from './components/TaskList.vue'
 import { useTasks } from './composables/useTasks'
 
 const { tasks, addTask, removeTask, getDaysUntilDeadline, hotTasks } = useTasks()
+
+const appStatus = import.meta.env.VITE_APP_STATUS || 'Development'
+
 </script>
 
 <style>
@@ -45,7 +45,13 @@ const { tasks, addTask, removeTask, getDaysUntilDeadline, hotTasks } = useTasks(
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -106,7 +112,9 @@ body {
   font-weight: 400;
 }
 
-.stat.urgent { color: #c0392b; }
+.stat.urgent {
+  color: #c0392b;
+}
 
 .divider {
   color: #d4cfc8;
@@ -131,5 +139,16 @@ body {
   background: white;
   border-radius: 16px;
   border: 1.5px dashed #e0dbd2;
+}
+.app-status {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f7f4ef;
+  border: 1.5px solid #e8e3da;
+  color: #6b6257;
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>

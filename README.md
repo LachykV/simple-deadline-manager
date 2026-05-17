@@ -1,6 +1,11 @@
  Simple Deadline Manager
+[![CI/CD Pipeline](https://github.com/LachykV/simple-deadline-manager/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/LachykV/simple-deadline-manager/actions/workflows/ci-cd.yml)
+> MVP для управління дедлайнами: додавання завдань, встановлення дедлайнів, фільтрацією за терміновістю.
 
-> MVP для управління дедлайнами студента: додавання завдань, встановлення дедлайнів, фільтрацією за терміновістю.
+## Production
+
+Робоча версія застосунку доступна за посиланням:
+https://simple-deadline-manager.vercel.app/
 
 ## Стек технологій
 

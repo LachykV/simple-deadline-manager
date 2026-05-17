@@ -38,6 +38,8 @@ const { tasks, addTask, removeTask, getDaysUntilDeadline, hotTasks } = useTasks(
 
 const appStatus = import.meta.env.VITE_APP_STATUS || 'Development'
 
+const testVar = 1
+
 </script>
 
 <style>
